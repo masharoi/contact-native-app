@@ -29,23 +29,6 @@ export default class App extends Component<Props> {
       username: "",
       started: false
     };
-    // console.log(this.socket);
-    // this.socket = io("http://10.0.2.2:5000", {
-    //   jsonp: false,
-    //   transports: ["websocket"]
-    // });
-    // this.socket.connect();
-    //
-    // console.log(this.socket);
-    // this.socket.on("connect", () => {
-    //   console.log("connected to socket server");
-    // });
-    // this.send_message = () => {
-    //   console.log("sending message from client");
-    //   this.socket.emit("join_room", {
-    //     username: "Masha"
-    //   });
-    // };
   }
 
   update_username = text => {

@@ -13,5 +13,10 @@ export default StyleSheet.create({
   nonEmptyStateContainer: {
     marginLeft: 20,
     marginRight: 20,
+  },
+  mainWord: {
+    borderColor: 'black',
+    borderBottomWidth: 1,
+    
   }
 });

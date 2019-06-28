@@ -8,7 +8,8 @@ import {
   View,
   Button,
   Alert,
-  TextInput
+  TextInput,
+  ScrollView
 } from "react-native";
 import styles from './styles/Chat.style.js';
 
@@ -18,6 +19,7 @@ export default class Chat extends ChatSocket {
 
     this.state = {
       room: null,
+      mainWord: "Heaven",
       message: "",
       guess: "",
       contact_word: "",
@@ -28,10 +30,10 @@ export default class Chat extends ChatSocket {
     this.join_room();
   }
   render() {
-    const { room } = this.state;
+    const { room, mainWord } = this.state;
     const empty_state = <Text style={styles.emptyState}> Be the first one to create Contact!</Text>;
     const non_empty_state = (
-      <View style={styles.nonEmptyStateContainer}>
+      <ScrollView style={styles.nonEmptyStateContainer}>
         {this.state.contacts.map(message => {
           return (
             <Contact
@@ -41,11 +43,14 @@ export default class Chat extends ChatSocket {
             />
           );
         })}
-      </View>
+      </ScrollView>
     );
     return (
       <View style={styles.container}>
+        <View style={styles.mainWord}>
         <Text>The room is {room}</Text>
+        <Text>{mainWord}</Text>
+        </View>
 
         {this.state.contacts.length == 0 ? empty_state : non_empty_state}
 

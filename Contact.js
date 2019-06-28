@@ -5,57 +5,57 @@ import {
   View,
   Button,
   Alert,
-  TextInput
+  TextInput,
+  TouchableWithoutFeedback
 } from "react-native";
-import styles from './styles/Contact.style.js';
+import styles from "./styles/Contact.style.js";
 
 export default class Contact extends React.Component {
   state = {
     word: "",
     defaultView: true
   };
-  handleMouseEnter = () => {
+
+  contactClicked = () => {
     this.setState({ defaultView: false });
   };
 
-  handleMouseLeave = () => {
+  cancelContact = () => {
     this.setState({ defaultView: true });
   };
   render() {
     const { word } = this.state;
     const { contact, username, description } = this.props;
     const defaultContactView = (
-      <View style={styles.container}>
-        <Text>{description}</Text>
+      <View>
+        <View style={styles.defaultContainer}>
+          <Text>{description}</Text>
+        </View>
       </View>
     );
     const selectedContactView = (
-      <View>
+      <View style={styles.selectedContainer}>
+        <Button onPress={this.cancelContact} value={word} title="Cancel" />
         <TextInput
           placeholder="Guess"
           value={word}
           onChange={e => this.setState({ word: e.target.value })}
         />
-        <Button
-          onPress={contact}
-          value={word}
-          title="Try"
-        ></Button>
+        <Button onPress={contact} value={word} title="Try" />
       </View>
     );
 
     return (
-      <View
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-      >
+      <TouchableWithoutFeedback onPress={this.contactClicked}>
         <View>
-          <Text>{username}</Text>
+          <View>
+            <Text>{username}</Text>
+          </View>
+          <View>
+            {this.state.defaultView ? defaultContactView : selectedContactView}
+          </View>
         </View>
-        <View>
-          {this.state.defaultView ? defaultContactView : selectedContactView}
-        </View>
-      </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
